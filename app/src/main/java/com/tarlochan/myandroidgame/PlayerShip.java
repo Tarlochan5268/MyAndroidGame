@@ -18,13 +18,15 @@ public class PlayerShip {
     private final int MIN_SPEED = 1;
     private final int MAX_SPEED = 20;
 
-    public PlayerShip(Context context)
+    public PlayerShip(Context context, int screenX, int screenY)
     {
         boosting = false;
-        x = 50;
-        y = 50;
+        this.x = 50;
+        this.y = 50;
         speed = 1;
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
+        maxY = screenY - bitmap.getHeight();
+        minY = 0;
     }
     public void update()
     {
