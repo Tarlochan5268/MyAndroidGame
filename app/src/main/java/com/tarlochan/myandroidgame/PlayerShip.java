@@ -7,6 +7,7 @@ import android.graphics.Rect;
 
 public class PlayerShip {
     private Bitmap bitmap;
+    private int shieldStrength;
     private int x, y;
     private int speed = 0;
     private boolean boosting;
@@ -30,6 +31,7 @@ public class PlayerShip {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
         maxY = screenY - bitmap.getHeight();
         minY = 0;
+        shieldStrength = 2;
         // Initialize the hit box
         hitBox = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
     }
@@ -79,4 +81,10 @@ public class PlayerShip {
         return speed;
     }
     public Rect getHitbox(){ return hitBox; }
+    public int getShieldStrength() {
+        return shieldStrength;
+    }
+    public void reduceShieldStrength(){
+        shieldStrength --;
+    }
 }

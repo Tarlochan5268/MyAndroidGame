@@ -22,12 +22,29 @@ public class EnemyShip {
 
     public EnemyShip(Context context, int screenX, int screenY)
     {
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.enemy);
+        //bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.enemy);
+
+        Random generator = new Random();
+        int whichBitmap = generator.nextInt(3);
+        switch (whichBitmap){
+            case 0:
+                bitmap = BitmapFactory.decodeResource
+                        (context.getResources(), R.mipmap.enemy3);
+                break;
+            case 1:
+                bitmap = BitmapFactory.decodeResource
+                        (context.getResources(), R.mipmap.enemy2);
+                break;
+            case 2:
+                bitmap = BitmapFactory.decodeResource
+                        (context.getResources(), R.mipmap.enemy);
+                break;
+        }
         maxX = screenX;
         maxY = screenY;
         minX = 0;
         minY = 0;
-        Random generator = new Random();
+        //Random generator = new Random();
         speed = generator.nextInt(6)+10;
         x = screenX;
         y = generator.nextInt(maxY) - bitmap.getHeight();
