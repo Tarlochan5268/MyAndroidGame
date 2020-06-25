@@ -3,12 +3,15 @@ package com.tarlochan.myandroidgame;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 
 public class PlayerShip {
     private Bitmap bitmap;
     private int x, y;
     private int speed = 0;
     private boolean boosting;
+    // A hit box for collision detection
+    private Rect hitBox;
 
     private final int GRAVITY = -12;
     // Stop ship leaving the screenprivate
@@ -27,6 +30,8 @@ public class PlayerShip {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ship);
         maxY = screenY - bitmap.getHeight();
         minY = 0;
+        // Initialize the hit box
+        hitBox = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
     }
     public void update()
     {
@@ -48,6 +53,11 @@ public class PlayerShip {
         // But don't let ship stray off screen
         if (y < minY) {    y = minY;  }
         if (y > maxY) {    y = maxY;  }
+        // Refresh hit box location
+        hitBox.left = x;
+        hitBox.top = y;
+        hitBox.right = x + bitmap.getWidth();
+        hitBox.bottom = y + bitmap.getHeight();
     }
 
     public void setBoosting() {  boosting = true;}
@@ -68,4 +78,5 @@ public class PlayerShip {
     public int getSpeed() {
         return speed;
     }
+    public Rect getHitbox(){ return hitBox; }
 }
